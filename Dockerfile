@@ -5,6 +5,6 @@ COPY . /resume
 
 WORKDIR /resume
 
-RUN pdflatex resume.tex
+RUN pdflatex /resume/resume.tex
 
 CMD ["pdflatex", "resume.tex"]
