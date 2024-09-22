@@ -1,0 +1,29 @@
+name: Build LaTeX Resume
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Build Docker Image
+        run: docker build -t resume-builder .
+
+      - name: Run LaTeX to generate PDF
+        run: docker run --rm -v $(pwd):/resume resume-builder
+
+      - name: Upload PDF as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: resume
+          path: /resume/resume.pdf
