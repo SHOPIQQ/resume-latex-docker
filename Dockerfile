@@ -1,10 +1,8 @@
-
-FROM texlive/texlive:latest
+FROM blang/latex:ubuntu
 
 COPY . /resume
 
 WORKDIR /resume
 
-RUN pdflatex /resume/resume.tex
-
 CMD ["pdflatex", "resume.tex"]
+
