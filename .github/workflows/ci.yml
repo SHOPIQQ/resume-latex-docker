@@ -1,4 +1,4 @@
-kname: Build and Publish Resume
+name: Build and Publish Resume  # Исправлено на 'name'
 
 on:
   push:
@@ -33,5 +33,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./ 
-          publish_branch: gh-pages  
+          publish_branch: gh-pages
 
