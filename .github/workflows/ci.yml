@@ -1,4 +1,4 @@
-name: Build LaTeX Resume
+name: Build and Publish Resume
 
 on:
   push:
@@ -21,9 +21,17 @@ jobs:
 
       - name: Run LaTeX to generate PDF
         run: docker run --rm -v $(pwd):/resume resume-builder
-
+        
       - name: Upload PDF as artifact
         uses: actions/upload-artifact@v3
         with:
           name: resume
-          path: ./resume.pdf
+          path: ./resume.pdf  
+
+      - name: Publish to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./  
+          publish_branch: gh-pages  
+
